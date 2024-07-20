@@ -1,6 +1,8 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
+using Mapsui.Tiling;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,6 +31,8 @@ public class SvgSymbolSample : ISample
             BackColor = Color.WhiteSmoke,
         };
 
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
         map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2));
 
         map.Layers.Add(layer);
@@ -40,26 +44,26 @@ public class SvgSymbolSample : ISample
     [
         new PointFeature(new MPoint(50, 50))
         {
-            Styles = [CreateSymbolStyle()]
+            Styles = [CreateSymbolStyle(Color.FromRgba(0, 128, 0, 255), Color.FromRgba(128, 0, 0, 255))]
         },
         new PointFeature(new MPoint(50, 100))
         {
-            Styles = [CreateSymbolStyle()]
+            Styles = [CreateSymbolStyle(Color.FromRgba(0, 255, 0, 255), Color.FromRgba(200, 0, 0, 255))]
         },
         new PointFeature(new MPoint(100, 50))
         {
-            Styles = [CreateSymbolStyle()]
+            Styles = [CreateSymbolStyle(Color.FromRgba(0, 190, 0, 255), Color.FromRgba(32, 0, 0, 255))]
         },
         new PointFeature(new MPoint(100, 100))
         {
-            Styles = [CreateSymbolStyle()]
+            Styles = [CreateSymbolStyle(Color.FromRgba(0, 33, 0, 255), Color.FromRgba(190, 0, 0, 255))]
         }
     ];
 
-    private static SymbolStyle CreateSymbolStyle() => new()
+    private static SymbolStyle CreateSymbolStyle(Color fillcolor, Color strokecolor) => new()
     {
-        ImageSource = "embedded://mapsui.resources.images.pin.svg",
-        SvgFillColor = Color.FromRgba(0, 177, 0, 255),
-        SvgStrokeColor = Color.FromRgba(32, 96, 32, 255),
+        ImageSource = "embedded://mapsui.resources.images.pin5.svg",
+        SvgFillColor = fillcolor,
+        SvgStrokeColor = strokecolor
     };
 }
